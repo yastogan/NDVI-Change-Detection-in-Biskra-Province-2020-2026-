@@ -123,7 +123,7 @@ The repository contains:
 maps/
 ├── 01_NDVI_Spatial_Distribution_Biskra_2020.png
 ├── 02_NDVI_Spatial_Distribution_Biskra_2026.png
-└── 03_NDVI_Change_Detection_Biskra_2020_2026.png
+└── NDVI_Change_Detection_Biskra_2020_2026.png
 ```
 
 ---
