@@ -1,95 +1,139 @@
-# NDVI-Change-Detection-in-Biskra-Province-2020-2026-
-Project Overview
 
-This project analyzes vegetation dynamics in Biskra Province, Algeria, by comparing Normalized Difference Vegetation Index (NDVI) values between 2020 and 2026 using Sentinel-2 imagery. The objective is to identify areas that experienced vegetation improvement, degradation, or remained stable over the six-year period.
+# NDVI Change Detection Analysis (2020–2026)
 
-The analysis was performed using Google Earth Engine for image preprocessing and NDVI calculation, followed by QGIS and GDAL for spatial analysis, raster processing, visualization, and cartographic production.
+## Overview
 
-Objectives
-Generate NDVI maps for 2020 and 2026.
-Detect vegetation changes between both years.
-Classify NDVI change into five meaningful categories.
-Quantify vegetation change across the province.
-Produce professional cartographic outputs suitable for environmental monitoring.
-Data Sources
-Dataset	Source
-Sentinel-2 MSI Level-2A	Copernicus Programme
-Administrative Boundary	GADM / Open GIS Data
-Software
-Google Earth Engine
-QGIS
-GDAL
-Methodology
-1. Image Preparation
+This project evaluates vegetation dynamics across **Biskra Province, Algeria**, by comparing **Normalized Difference Vegetation Index (NDVI)** values derived from Sentinel-2 imagery between **2020** and **2026**.
 
-Sentinel-2 cloud-free composites were generated for both study years using Google Earth Engine.
+The objective is to identify areas where vegetation has significantly increased, decreased, or remained relatively stable over the six-year period using Google Earth Engine, GDAL, and QGIS.
 
-2. NDVI Calculation
+---
 
-NDVI was calculated using the standard equation:
+## Methodology
 
-NDVI = (NIR − Red) / (NIR + Red)
+The workflow consisted of the following steps:
 
-where:
+1. Acquisition of cloud-free Sentinel-2 Level-2A imagery for 2020 and 2026.
+2. NDVI computation using the standard formula:
 
-NIR = Band 8
-Red = Band 4
-3. Change Detection
+[
+NDVI = \frac{NIR - Red}{NIR + Red}
+]
 
-Vegetation change was calculated by subtracting the 2020 NDVI from the 2026 NDVI:
+3. Export of 10 m NDVI rasters from Google Earth Engine.
+4. Clipping datasets to the administrative boundary of Biskra Province.
+5. Projection to an Equal-Area coordinate system (EPSG:6933) to ensure accurate area calculations.
+6. Pixel-wise subtraction:
 
-NDVI Change = NDVI₍₂₀₂₆₎ − NDVI₍₂₀₂₀₎
+> NDVI Change = NDVI 2026 − NDVI 2020
 
-Positive values indicate vegetation improvement, while negative values indicate vegetation loss.
+7. Classification of change into five categories.
 
-4. Classification
+---
 
-The change raster was classified into five categories:
+## NDVI Change Classification
 
-Class	Description
-1	Strong decrease
-2	Moderate decrease
-3	Stable / Low change
-4	Moderate increase
-5	Strong increase
-5. Area Calculation
+| Class               | NDVI Difference | Interpretation                 |
+| ------------------- | --------------- | ------------------------------ |
+| Strong decrease     | < -0.10         | Significant vegetation loss    |
+| Moderate decrease   | -0.10 to -0.03  | Slight vegetation decline      |
+| Stable / Low change | -0.03 to 0.03   | Little or no detectable change |
+| Moderate increase   | 0.03 to 0.10    | Moderate vegetation recovery   |
+| Strong increase     | > 0.10          | Significant vegetation gain    |
 
-The classified raster was reprojected to an Equal Area projection (EPSG:6933) to ensure accurate area estimation before calculating the spatial extent of each class.
+---
 
-Results
+# Results
 
-The analysis shows that vegetation remained largely stable across Biskra Province between 2020 and 2026.
+The spatial analysis indicates that vegetation conditions in Biskra remained largely stable during the study period.
 
-Approximately 76.90 km² (about 89.5% of the valid study area) experienced little or no detectable change in vegetation condition.
+Most pixels fall within the **Stable / Low Change** category, indicating that vegetation patterns experienced only minor fluctuations between 2020 and 2026.
 
-Vegetation improvement was identified over approximately 7.59 km², representing areas where agricultural expansion, irrigation, or natural vegetation recovery may have occurred.
+Localized zones of vegetation gain are concentrated primarily in:
 
-Conversely, approximately 3.49 km² showed vegetation decline, suggesting localized degradation that may be associated with land-use changes, drought stress, or reduced vegetation cover.
+* irrigated agricultural areas,
+* oasis systems,
+* cultivated land,
+* seasonal vegetation corridors.
 
-The spatial distribution of change indicates that vegetation dynamics are concentrated mainly within agricultural zones and oasis systems, while large desert areas remained relatively unchanged throughout the study period.
+Vegetation decline appears as scattered patches and is generally associated with:
 
-Overall, the results indicate that vegetation conditions in Biskra Province remained generally stable during the 2020–2026 period, with localized areas of both improvement and degradation.
+* urban expansion,
+* land degradation,
+* agricultural abandonment,
+* natural seasonal variability.
 
-Area Statistics
-Change Category	Area (km²)
-Strong decrease	0.73
-Moderate decrease	2.76
-Stable / Low change	76.90
-Moderate increase	5.41
-Strong increase	2.18
-Maps Produced
-01_NDVI_Spatial_Distribution_Biskra_2020.png
-02_NDVI_Spatial_Distribution_Biskra_2026.png
-NDVI_Change_2020_2026.png
-Skills Demonstrated
-Remote Sensing
-Vegetation Monitoring
-NDVI Analysis
-Change Detection
-Raster Processing
-Spatial Analysis
-Google Earth Engine
-QGIS
-GDAL
-Cartographic Design
-GIS Data Visualization
+No extensive province-wide vegetation degradation was detected.
+
+---
+
+# Area Statistics
+
+| Change Class        | Area (km²) |
+| ------------------- | ---------: |
+| Strong decrease     |      73.41 |
+| Moderate decrease   |     275.75 |
+| Stable / Low change |   7,689.82 |
+| Moderate increase   |     540.51 |
+| Strong increase     |     218.45 |
+
+---
+
+# Interpretation
+
+Approximately **87.8%** of the analyzed area remained stable over the six-year period, demonstrating that vegetation conditions across Biskra were generally consistent.
+
+Areas showing vegetation improvement exceed areas experiencing vegetation decline, suggesting localized agricultural expansion and improved vegetation productivity in several irrigated zones.
+
+The strongest vegetation gains are mainly observed around cultivated lands and oasis environments, whereas vegetation losses remain limited in extent and spatially fragmented.
+
+Overall, the results indicate that no major regional-scale vegetation degradation occurred during the study period.
+
+---
+
+# Software & Data
+
+**Satellite Data**
+
+* Sentinel-2 Level-2A
+* Google Earth Engine
+
+**Software**
+
+* Google Earth Engine
+* QGIS
+* GDAL
+
+**Spatial Resolution**
+
+* 10 m
+
+**Projection**
+
+* WGS 84 / UTM Zone 31N (EPSG:32631)
+* Equal-Area Projection (EPSG:6933) used for area statistics
+
+---
+
+# Project Outputs
+
+The repository contains:
+
+```
+maps/
+├── 01_NDVI_Spatial_Distribution_Biskra_2020.png
+├── 02_NDVI_Spatial_Distribution_Biskra_2026.png
+└── 03_NDVI_Change_Detection_Biskra_2020_2026.png
+```
+
+---
+
+# Key Findings
+
+* Six-year NDVI change assessment for Biskra Province.
+* Pixel-based change detection at 10 m spatial resolution.
+* Equal-area analysis for accurate area estimation.
+* More vegetation gain than vegetation loss.
+* Stable vegetation dominates the province.
+* Workflow developed using Google Earth Engine, GDAL, and QGIS.
+* Results can support environmental monitoring, land management, and sustainable agricultural planning.
